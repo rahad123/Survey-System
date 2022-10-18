@@ -1,10 +1,15 @@
-import * as assert from 'assert';
+import * as assert from "assert";
+import chai from "chai";
+import chaiHttp from "chai-http";
+import { app } from "../server.js";
 
-// chai.use(chaiHttp);
-console.log('working..');
+chai.use(chaiHttp);
+
 describe("survey test suit", function () {
   it("should return the result of survey", function () {
-    const value = 5;
-    assert.equal(value, 5, "value should be eqaul");
+    const [err, res] = chai.request(app).get('/');
+
+    const survey = res.body.data;
+    console.log(survey);
   });
 });

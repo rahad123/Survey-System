@@ -1,17 +1,18 @@
 import express from "express";
 import bodyparser from "body-parser";
-import { storeSurvey } from "./api/storeSurvey.js";
+import storeSurvey from "./api/storeSurvey.js";
 import { retreiveSurvey } from "./api/retreiveSurvey.js";
-import { Router, json } from "express";
+import { json } from "express";
+var router = express.Router();
 
 let app = new express();
 app.use(bodyparser.json());
 
-app.get("/", json(), retreiveSurvey);
-app.post("/", json(), storeSurvey);
+router.get("/", json(), retreiveSurvey);
+router.post("/", json(), storeSurvey);
 
 app.listen(3002, () => {
   console.log(`Example app listening on port 3002`);
 });
 
-export { app };
+export { router };
